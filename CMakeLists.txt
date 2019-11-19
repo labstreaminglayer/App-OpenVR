@@ -1,27 +1,14 @@
 cmake_minimum_required(VERSION 3.0)
 project(LSLOpenVR VERSION 0.0.1)
-
-# General Config #
-
-# load LSLAppBoilerplate if not done already
-if(NOT TARGET LSL::lsl)
-	if(NOT LSL_INSTALL_ROOT)
-		message(FATAL_ERROR "When building a single app out of tree you need to set LSL_INSTALL_ROOT ( cmake -DLSL_INSTALL_ROOT=/path/to/installed/lsl)")
-	endif()
-	if(NOT IS_ABSOLUTE ${LSL_INSTALL_ROOT})
-		message(FATAL_ERROR "LSL_INSTALL_ROOT needs to be an absolute path")
-	endif()
-	file(TO_CMAKE_PATH ${LSL_INSTALL_ROOT} LSL_INSTALL_ROOT)
-	list(APPEND CMAKE_MODULE_PATH "${LSL_INSTALL_ROOT}/cmake")
-    include(LSLAppBoilerplate)
-    include(LSLSaneDefaults)
-endif()
+include(Findliblsl.cmake)
 
 set(META_PROJECT_DESCRIPTION "Capture OpenVR pose data.")
 
-# THIRD PARTY LIBRARIES #
-# Qt
-find_package(Qt5 REQUIRED COMPONENTS Core Network Xml Gui Widgets)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+find_package(Qt5 REQUIRED COMPONENTS Network Xml Widgets)
 
 # OpenVR
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
