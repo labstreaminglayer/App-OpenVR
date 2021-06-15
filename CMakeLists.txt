@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 project(LSLOpenVR VERSION 0.0.1)
-include(Findliblsl.cmake)
 
 set(META_PROJECT_DESCRIPTION "Capture OpenVR pose data.")
 
@@ -9,6 +8,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 find_package(Qt5 REQUIRED COMPONENTS Network Xml Widgets)
+
+find_package(LSL REQUIRED
+    HINTS ${LSL_INSTALL_ROOT}
+    "${CMAKE_CURRENT_LIST_DIR}/../../LSL/liblsl/build/"
+    "${CMAKE_CURRENT_LIST_DIR}/../../LSL/liblsl/build/install"
+    "${CMAKE_CURRENT_LIST_DIR}/../../LSL/liblsl/out/build/x64-Release"
+    "${CMAKE_CURRENT_LIST_DIR}/../../LSL/liblsl/out/install/x64-Release"
+    PATH_SUFFIXES share/LSL
+)
 
 # OpenVR
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")

@@ -16,11 +16,11 @@ Instructions:
 1. Open a Command Prompt / Terminal and change into this directory.
 1. Make a build subdirectory: `mkdir build && cd build`
 1. Call cmake
-    * Windows: `cmake .. -G "Visual Studio 14 2015 Win64"` (other [generators](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html#visual-studio-generators))
-    * Mac: `cmake .. -G Xcode`
-1. You may need to specify additional cmake options.
-    * set OpenVR_ROOT_DIR to the directory where you downloaded openvr, or let it download for you.
-    * -DQt5_DIR=path/to/qt/version/architecture/lib/cmake/Qt5
+    * `cmake -B build -S . -DCMAKE_INSTALL_PREFIX="build/install"
+        * set OpenVR_ROOT_DIR to the directory where you downloaded openvr, or let it download for you.
+        * -DQt5_DIR=path/to/qt/version/architecture/lib/cmake/Qt5
+        * -DLSL_INSTALL_ROOT=path/to/lsl/install
+    * `cmake --build ./build -j --config Release --target install`
 
 
 ## Usage Instructions
